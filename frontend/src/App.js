@@ -66,7 +66,36 @@ class App extends React.Component {
     }
 
 
+    render() {
+        return (
+            <Router>
+                <header>
+                    <Navbar navbarItems={this.state.navbarItems}/>
+                </header>
+                <main role="main" className="flex-shrink-0">
+                    <div className="container">
+                        <Switch>
+                            <Route exact path='/'>
+                                <UserList users={this.state.users}/>
+                            </Route>
+                            <Route exact path='/projects'>
+                                <ProjectList items={this.state.projects}/>
+                            </Route>
+                            <Route exact path='/todos'>
+                                <ToDoList items={this.state.todos}/>
+                            </Route>
+                            <Route path="/project/:id" children={<ProjectDetail getProject={(id) => this.getProject(id)}
+                                                                                item={this.state.project}/>}/>
+                        </Switch>
+                    </div>
+                </main>
+                <Footer/>
+            </Router>
 
+
+        )
+    }
+}
 
 
 export default App;
