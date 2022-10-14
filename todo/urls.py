@@ -17,6 +17,7 @@ import email
 from msilib import schema
 from django.contrib import admin
 from django.urls import path, include
+from graphene_django.views import GraphQLView
 from rest_framework.routers import DefaultRouter
 from todoapp.views import ToDoViewSet, ProjectViewSet
 from userapp.views import UserListAPIView, UserViewSet
@@ -58,4 +59,5 @@ urlpatterns = [
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     # path('api/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
+    path('graphql/', GraphQLView.as_view(graphiql=True)),
 ]
