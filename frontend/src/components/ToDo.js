@@ -9,6 +9,9 @@ const ToDoListItem = ({item}) => {
             <td>{item.create}</td>
             <td>{item.project}</td>
             <td>{item.creator}</td>
+            <td>
+                <button type='button'>Delete</button>
+            </td>
         </tr>
     )
 }
@@ -23,6 +26,7 @@ const ToDoList = ({items}) => {
                 <th>Create</th>
                 <th>Project</th>
                 <th>Creator</th>
+                <th>Delete</th>
             </tr>
             {items.map((item) => <ToDoListItem item={item} />)}
         </table>

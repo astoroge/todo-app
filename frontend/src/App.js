@@ -38,6 +38,25 @@ class App extends React.Component {
         }
     }
     
+    delete_todo(id){
+        const headers = this.get_headers()
+        axios.delete(url: `http://127.0.0.1:8010/api/todos/${id}`, config: {headers}).then(response => {
+            this.load_data()
+        }).catch(error => {
+            console.log(error)
+            this.setState(state: {todos:[]})})
+    }
+
+    create_todo(name, todos){
+        const headers = this.get_headers()
+        const data = {name:name, authors:authors}
+        axios.post(url: `http://127.0.0.1:8010/api/todos/`,data, config: {headers}).then(response => {
+            this.load_data()
+        }).catch(error => {
+            console.log(error)
+            this.setState(state: {todos:[]})})
+    }
+
     login(username, password) {
         axios.post(get_url('token/'), {username: username, password: password})
             .then(response => {
@@ -129,6 +148,14 @@ class App extends React.Component {
                             </Route>
                             <Route exact path='/projects'>
                                 <ProjectList items={this.state.projects}/>
+                            </Route>
+                            <Route exact path='/todos'>
+                                <ToDoList items={this.state.todos}
+                                delete_todo={(id) => this.delete_todo(id)}/>
+                            </Route>
+                            <Route exact path='/todos/create'>
+                                <AuthForm name={this.state.name}/>
+                                create_todo={(name, todos) => this.create_todo(id)}/>
                             </Route>
                             <Route exact path='/todos'>
                                 <ToDoList items={this.state.todos}/>
